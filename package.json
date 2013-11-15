@@ -1,0 +1,17 @@
+{
+  "name": "transformation",
+  "version": "0.1.0",
+  "description": "A bunch of 3d transformation api re-used in a few projects",
+  "main": "scripts/js/lib/Transformation.js",
+  "dependencies": {},
+  "devDependencies": {
+    "coffee-script": "~1.6.3",
+    "little-popo": "~0.1.2"
+  },
+  "scripts": {
+    "test": "node ./node_modules/coffee-script/bin/cake test",
+    "prepublish": "node ./node_modules/coffee-script/bin/cake build"
+  },
+  "author": "Aria Minaei",
+  "license": "MIT"
+}
