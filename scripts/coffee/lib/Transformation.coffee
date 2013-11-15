@@ -2,13 +2,12 @@
 # but I'm cutting it down to a basic 3d transformation
 # get/set api.
 #
-# I'll leave the matrix calculations to gl-matrix
+# I'll leave the matrix calculations to an external lib.
 
 perspective = require './transformation/perspective'
 translation = require './transformation/translation'
 rotation = require './transformation/rotation'
 scale = require './transformation/scale'
-base = require './transformation/base'
 
 emptyStack = ->
 
@@ -48,7 +47,7 @@ copyStack = (from, to) ->
 	to[4] = from[4]
 	to[5] = from[5]
 
-	to[6]  = from[6]
+	to[6] = from[6]
 
 	to[7] = from[7]
 	to[8] = from[8]
@@ -89,9 +88,6 @@ module.exports = class Transformation
 
 			localRotation: no
 
-
-		@_identityMatrix = base.identity()
-
 		@_tempMode = no
 
 	temporarily: ->
@@ -123,10 +119,6 @@ module.exports = class Transformation
 			@_tempMode = no
 
 		@
-
-	toCss: ->
-
-		base.toCss @toMatrix()
 
 	toPlainCss: ->
 
@@ -165,52 +157,6 @@ module.exports = class Transformation
 			css += scale.toPlainCss @_current[3], @_current[4], @_current[5]
 
 		css
-
-	toArray: ->
-
-		base.toArray @toMatrix()
-
-	toMatrix: ->
-
-		soFar = @_getIdentityMatrix()
-
-		# movement
-		if @_has.movement
-
-			soFar = translation.setTo soFar, @_current[0], @_current[1], @_current[2]
-
-		# scale
-		if @_has.scale
-
-			scale.applyTo soFar, @_current[3], @_current[4], @_current[5]
-
-		# perspectove
-		if @_has.perspective
-
-			perspective.applyTo soFar, @_current[6]
-
-		# rotation
-		if @_has.rotation
-
-			rotation.applyTo soFar, @_current[7], @_current[8], @_current[9]
-
-		# translation
-		if @_has.localMovement
-
-			translation.applyTo soFar, @_current[10], @_current[11], @_current[12]
-
-		# localRotation
-		if @_has.localRotation
-
-			rotation.applyTo soFar, @_current[13], @_current[14], @_current[15]
-
-		soFar
-
-	_getIdentityMatrix: ->
-
-		base.setIdentity @_identityMatrix
-
-		@_identityMatrix
 
 	###
 	Movement
