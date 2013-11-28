@@ -217,7 +217,9 @@ module.exports = class Transformation
 
 	getScale: ->
 
-		@_current.subarray 3, 3
+		# debugger
+
+		@_current.subarray 3, 6
 
 	scaleTo: (x, y, z) ->
 
@@ -343,7 +345,7 @@ module.exports = class Transformation
 
 	getRotation: ->
 
-		@_current.subarray 7, 3
+		@_current.subarray 7, 10
 
 	rotateTo: (x, y, z) ->
 
@@ -429,7 +431,7 @@ module.exports = class Transformation
 
 	getLocalMovement: ->
 
-		@_current.subarray 10, 3
+		@_current.subarray 10, 13
 
 	localMoveTo: (x, y, z) ->
 
@@ -515,7 +517,7 @@ module.exports = class Transformation
 
 	getLocalRotation: ->
 
-		@_current.subarray 13, 3
+		@_current.subarray 13, 16
 
 
 	localRotateTo: (x, y, z) ->

@@ -3,11 +3,12 @@ module.exports = cssify =
 	convert: (t) ->
 
 		has = t._has
+		current = t._current
 
 		# movement
 		if has.movement
 
-			css = cssify._translation @_current[0], @_current[1], @_current[2]
+			css = cssify._translation current[0], current[1], current[2]
 
 		else
 
@@ -16,27 +17,27 @@ module.exports = cssify =
 		# perspectove
 		if has.perspective
 
-			css += cssify._perspective @_current[6]
+			css += cssify._perspective current[6]
 
 		# rotation
 		if has.rotation
 
-			css += cssify._rotation @_current[7], @_current[8], @_current[9]
+			css += cssify._rotation current[7], current[8], current[9]
 
 		# translation
 		if has.localMovement
 
-			css += cssify._translation @_current[10], @_current[11], @_current[12]
+			css += cssify._translation current[10], current[11], current[12]
 
 		# rotation
 		if has.localRotation
 
-			css += cssify._rotation @_current[13], @_current[14], @_current[15]
+			css += cssify._rotation current[13], current[14], current[15]
 
 		# scale
 		if has.scale
 
-			css += cssify._scale @_current[3], @_current[4], @_current[5]
+			css += cssify._scale current[3], current[4], current[5]
 
 		css
 
