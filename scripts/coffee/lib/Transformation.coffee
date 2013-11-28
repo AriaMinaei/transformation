@@ -4,11 +4,6 @@
 #
 # I'll leave the matrix calculations to an external lib.
 
-perspective = require './transformation/perspective'
-translation = require './transformation/translation'
-rotation = require './transformation/rotation'
-scale = require './transformation/scale'
-
 emptyStack = ->
 
 	a = new Float32Array 16
@@ -120,44 +115,6 @@ module.exports = class Transformation
 
 		@
 
-	toPlainCss: ->
-
-		# movement
-		if @_has.movement
-
-			css = translation.toPlainCss @_current[0], @_current[1], @_current[2]
-
-		else
-
-			css = ''
-
-		# perspectove
-		if @_has.perspective
-
-			css += perspective.toPlainCss @_current[6]
-
-		# rotation
-		if @_has.rotation
-
-			css += rotation.toPlainCss @_current[7], @_current[8], @_current[9]
-
-		# translation
-		if @_has.localMovement
-
-			css += translation.toPlainCss @_current[10], @_current[11], @_current[12]
-
-		# rotation
-		if @_has.localRotation
-
-			css += rotation.toPlainCss @_current[13], @_current[14], @_current[15]
-
-		# scale
-		if @_has.scale
-
-			css += scale.toPlainCss @_current[3], @_current[4], @_current[5]
-
-		css
-
 	###
 	Movement
 	###
@@ -174,11 +131,7 @@ module.exports = class Transformation
 
 	getMovement: ->
 
-		{
-			x: @_current[0]
-			y: @_current[1]
-			z: @_current[2]
-		}
+		@_current.subarray 0, 3
 
 	moveTo: (x, y, z) ->
 
@@ -264,11 +217,7 @@ module.exports = class Transformation
 
 	getScale: ->
 
-		{
-			x: @_current[3]
-			y: @_current[4]
-			z: @_current[5]
-		}
+		@_current.subarray 3, 3
 
 	scaleTo: (x, y, z) ->
 
@@ -394,11 +343,7 @@ module.exports = class Transformation
 
 	getRotation: ->
 
-		{
-			x: @_current[7]
-			y: @_current[8]
-			z: @_current[9]
-		}
+		@_current.subarray 7, 3
 
 	rotateTo: (x, y, z) ->
 
@@ -484,11 +429,7 @@ module.exports = class Transformation
 
 	getLocalMovement: ->
 
-		{
-			x: @_current[10]
-			y: @_current[11]
-			z: @_current[12]
-		}
+		@_current.subarray 10, 3
 
 	localMoveTo: (x, y, z) ->
 
@@ -574,11 +515,8 @@ module.exports = class Transformation
 
 	getLocalRotation: ->
 
-		{
-			x: @_current[13]
-			y: @_current[14]
-			z: @_current[15]
-		}
+		@_current.subarray 13, 3
+
 
 	localRotateTo: (x, y, z) ->
 
