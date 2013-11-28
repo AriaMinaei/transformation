@@ -11,7 +11,7 @@ scale = require './transformation/scale'
 
 emptyStack = ->
 
-	a = new Float64Array 16
+	a = new Float32Array 16
 
 	a[0] = 0
 	a[1] = 0
@@ -172,7 +172,7 @@ module.exports = class Transformation
 
 		@
 
-	movement: ->
+	getMovement: ->
 
 		{
 			x: @_current[0]
@@ -374,6 +374,10 @@ module.exports = class Transformation
 
 		@
 
+	getPerspective: ->
+
+		@_current[6]
+
 	###
 	Rotation
 	###
@@ -388,7 +392,7 @@ module.exports = class Transformation
 
 		@
 
-	rotation: ->
+	getRotation: ->
 
 		{
 			x: @_current[7]
@@ -478,7 +482,7 @@ module.exports = class Transformation
 
 		@
 
-	localMovement: ->
+	getLocalMovement: ->
 
 		{
 			x: @_current[10]
@@ -568,7 +572,7 @@ module.exports = class Transformation
 
 		@
 
-	localRotation: ->
+	getLocalRotation: ->
 
 		{
 			x: @_current[13]
