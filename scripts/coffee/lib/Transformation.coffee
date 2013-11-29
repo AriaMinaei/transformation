@@ -30,6 +30,16 @@ emptyStack = ->
 	a[14] = 0
 	a[15] = 0
 
+	a.movement = a.subarray 0, 3
+
+	a.scale = a.subarray 3, 6
+
+	a.rotation = a.subarray 7, 10
+
+	a.localMovement = a.subarray 10, 13
+
+	a.localRotation = a.subarray 13, 16
+
 	a
 
 copyStack = (from, to) ->
@@ -131,7 +141,7 @@ module.exports = class Transformation
 
 	getMovement: ->
 
-		@_current.subarray 0, 3
+		@_current.movement
 
 	moveTo: (x, y, z) ->
 
@@ -217,9 +227,7 @@ module.exports = class Transformation
 
 	getScale: ->
 
-		# debugger
-
-		@_current.subarray 3, 6
+		@_current.scale
 
 	scaleTo: (x, y, z) ->
 
@@ -345,7 +353,7 @@ module.exports = class Transformation
 
 	getRotation: ->
 
-		@_current.subarray 7, 10
+		@_current.rotation
 
 	rotateTo: (x, y, z) ->
 
@@ -431,7 +439,7 @@ module.exports = class Transformation
 
 	getLocalMovement: ->
 
-		@_current.subarray 10, 13
+		@_current.localMovement
 
 	localMoveTo: (x, y, z) ->
 
@@ -517,8 +525,7 @@ module.exports = class Transformation
 
 	getLocalRotation: ->
 
-		@_current.subarray 13, 16
-
+		@_current.localRotation
 
 	localRotateTo: (x, y, z) ->
 
