@@ -6,29 +6,13 @@
 
 emptyStack = ->
 
-	a = new Float32Array 16
-
-	a[0] = 0
-	a[1] = 0
-	a[2] = 0
+	a = new Float32Array 20
 
 	a[3] = 1
 	a[4] = 1
 	a[5] = 1
 
 	a[6] = 10000
-
-	a[7] = 0
-	a[8] = 0
-	a[9] = 0
-
-	a[10] = 0
-	a[11] = 0
-	a[12] = 0
-
-	a[13] = 0
-	a[14] = 0
-	a[15] = 0
 
 	a.movement = a.subarray 0, 3
 
@@ -40,31 +24,13 @@ emptyStack = ->
 
 	a.localRotation = a.subarray 13, 16
 
+	a.rotate3d = a.subarray 16, 20
+
 	a
 
 copyStack = (from, to) ->
 
-	to[0] = from[0]
-	to[1] = from[1]
-	to[2] = from[2]
-
-	to[3] = from[3]
-	to[4] = from[4]
-	to[5] = from[5]
-
-	to[6] = from[6]
-
-	to[7] = from[7]
-	to[8] = from[8]
-	to[9] = from[9]
-
-	to[10] = from[10]
-	to[11] = from[11]
-	to[12] = from[12]
-
-	to[13] = from[13]
-	to[14] = from[14]
-	to[15] = from[15]
+	to.set from
 
 	return
 
@@ -87,6 +53,8 @@ module.exports = class Transformation
 
 			rotation: no
 
+			rotate3d: no
+
 			scale: no
 
 			localMovement: no
@@ -98,6 +66,7 @@ module.exports = class Transformation
 	temporarily: ->
 
 		copyStack @_main, @_temp
+
 		@_current = @_temp
 
 		@_tempMode = yes
@@ -422,6 +391,25 @@ module.exports = class Transformation
 		@_current[9] += z
 
 		@
+
+	###
+	rotate3d
+	###
+
+	rotate3d: (x, y, z, amount) ->
+
+		@_has.rotate3d = yes
+
+		@_current[16] = x
+		@_current[17] = y
+		@_current[18] = z
+		@_current[19] = amount
+
+		@
+
+	getRotate3d: ->
+
+		@_current.rotate3d
 
 	###
 	Local Movement

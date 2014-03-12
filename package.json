@@ -1,6 +1,6 @@
 {
   "name": "transformation",
-  "version": "0.2.0-beta1",
+  "version": "0.2.0-beta.2",
   "description": "A bunch of 3d transformation api re-used in a few projects",
   "main": "scripts/js/lib/Transformation.js",
   "dependencies": {
